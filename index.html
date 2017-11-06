@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>	
+	<style>
+	canvas{	
+			background: skyblue;
+			border:1px solid red;
+		}
+	</style>
+
+</head>
+<body>
+	<canvas width="600" height="600" id="ss"></canvas>
+	<script>
+		var ct=document.getElementById("ss");
+		var ctx=ct.getContext('2d');
+		
+		 ctx.fillStyle='red';
+
+		ctx.moveTo(300,100);
+		ctx.lineTo(500,200);
+		ctx.lineTo(400,200);
+		ctx.lineTo(400,300);
+		ctx.lineTo(200,300);
+		ctx.lineTo(200,200);
+		ctx.lineTo(100,200);
+		
+		
+		ctx.fill(); //自带闭合功能
+		
+		 // ctx.closepath();当不填充颜色时才用
+
+		
+		ctx.beginPath();
+		//ctx.stroke();
+		ctx.fillStyle='pink';
+		for(var j=0;j<2;j++){
+			var dd=40;
+			for(var i=0;i<4;i++){
+				var step=40;
+				ctx.moveTo(225+i*step,200+j*dd);
+				ctx.lineTo(255+i*step,200+j*dd);
+				ctx.lineTo(255+i*step,230+j*dd);
+				ctx.lineTo(225+i*step,230+j*dd);
+			};
+
+		};
+
+		
+		ctx.fill(); //自带闭合功能
+
+		ctx.beginPath();
+		ctx.fillStyle='yellow';
+		ctx.moveTo(200,300);
+		ctx.lineTo(400,300);
+		ctx.lineTo(450,350);
+		ctx.lineTo(150,350);
+		
+		ctx.fill(); 
+
+		ctx.beginPath();
+		ctx.fillStyle='blue';
+		ctx.moveTo(250,350);
+		ctx.lineTo(350,350);
+		ctx.lineTo(350,400);
+		ctx.lineTo(250,400);
+
+		ctx.fill(); 
+
+		ctx.beginPath();
+		ctx.fillStyle='orange';
+		var a=-90;
+		
+		var interId=setInterval (function(){
+			ctx.clearRect(0,0,400,50);
+			a++;
+			if(a>=270){
+				clearInterval(interId);
+				a=270;
+			}
+		ctx.moveTo(300,50);
+		ctx.arc(300,50,25,-90*Math.PI/180,a*Math.PI/180);
+		ctx.fill(); 
+
+		},10);
+
+			ctx.beginPath();
+			ctx.strokeStyle='orange';
+			ctx.lineWidth=5;
+			ctx.moveTo(300,100);
+			ctx.lineTo(300,75);
+			ctx.stroke();
+
+	
+
+		ctx.beginPath();
+		var x0=300,
+			y0=500;
+			r=50;
+
+		var step = 120,
+			b = -90;
+
+		var colors=['red','green','blue'];
+
+		var x1,y1;   // 记录文字的坐标
+		var distance=30;   // 超出圆饼的距离,用于计算文字的坐标
+
+
+		
+		for(var i=0;i<3;i++){
+			ctx.beginPath();
+			ctx.fillStyle=colors[i];
+			ctx.moveTo(x0,y0);
+
+			ctx.arc(x0,y0,r,b* Math.PI / 180,(b+120)* Math.PI / 180);
+			ctx.fill();
+	
+
+		ctx.beginPath();
+		ctx.strokeStyle=colors[i];
+		ctx.moveTo(x0,y0);
+		x1=x0+(r+distance)*Math.cos((b+step/2)* Math.PI/180);
+		y1=y0+(r+distance)*Math.sin((b+step/2)* Math.PI/180);
+		ctx.lineTo(x1,y1);
+		ctx.stroke();
+
+
+		ctx.font='20px 黑体';
+		 if ( b + step / 2 < 270 && b+ step / 2 > 90 ) {
+		 	ctx.textAlign = 'right';
+		 }
+
+		ctx.fillText( '33.333 %', x1, y1 );
+
+		b += step;
+
+			}	
+
+
+
+
+
+
+
+
+
+		
+//arc();      绘制弧线,公式弧度=角度*Math.PI/180
+//arc(x,y,半径,弧度起始点,弧度终点,方向);
+
+
+
+	</script>
+</body>
+</html>
